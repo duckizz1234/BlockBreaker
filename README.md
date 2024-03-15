@@ -7,8 +7,8 @@ Implement a simple block breaker style game written in C# using Unity 2022.
 
 # Design Choices
 1) State Machines - Choosing to use state machines means individual objects can be autonomous. Statemachine for the game/views means we can show different menus depending on the game state. Statemachine for the projectiles means they can move on their own and react accordingly if their state changes from external input.
-      a) BaseView - View class that is attached to UI objects and allows them to be toggled visible/hidden when their related states is active/inactive (i.e. Replay menu)
-      b) BaseState - State class that is attached to game objects and controls their behaviors (i.e. Moving for Projectiles)
+<br />    a) BaseView - View class that is attached to UI objects and allows them to be toggled visible/hidden when their related states is active/inactive (i.e. Replay menu)
+<br />    b) BaseState - State class that is attached to game objects and controls their behaviors (i.e. Moving for Projectiles)
 2) Data in Json - Storing the parameters used in the Json file means we can adjust the values on the fly without needing to recompile the program. This allows another game designer to tweak and playtest without needing an engineer's intervention.
 3) Singleton managers - Allows to easily connect objects to important parts of the game.
 4) Positional movement - Allows control of where the projectile is specifically. Instead of using just physics and adding directional velocity, I decided to implement moving by specific position so we can have granual control on where the projectiles are and can allow for interesting game design decisions.
