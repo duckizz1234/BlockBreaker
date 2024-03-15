@@ -19,6 +19,7 @@ public class ConstantsLoader : MonoBehaviour
     public const string WallTag = "Wall";
     public const string BlockTag = "Block";
     public const string ProjectileTag = "Projectile";
+    public const string PlayerTag = "Player";
 
     private void Awake()
     {

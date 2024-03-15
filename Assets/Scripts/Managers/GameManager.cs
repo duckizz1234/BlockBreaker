@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject blockPrefab;
     public Transform blockParent;
+    public Transform[] walls;
 
     void Start()
     {
@@ -29,11 +30,22 @@ public class GameManager : MonoBehaviour
     {
         Vector2 spawnPos;
         bool isValid = false;
+        int maxAttempts = 100; // Limit the number of attempts to avoid infinite loop
+        int attempts = 0;
+
         do
         {
-            spawnPos = new Vector2(Random.Range(-5f, 5f), Random.Range(-3f, 3f));
+            spawnPos = new Vector2(Random.Range(walls[0].position.x, walls[1].position.x),
+                                   Random.Range(walls[2].position.y, walls[3].position.y));
+
             isValid = IsSpawnPositionValid(spawnPos);
-        } while (!isValid);
+            attempts++;
+        } while (!isValid && attempts < maxAttempts);
+
+        if (!isValid)
+        {
+            Debug.LogWarning("Failed to find a valid spawn position for the block.");
+        }
 
         return spawnPos;
     }
@@ -43,7 +55,7 @@ public class GameManager : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, ConstantsLoader.Instance.minDistanceBetweenBlocks);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag(ConstantsLoader.WallTag) || collider.CompareTag(ConstantsLoader.BlockTag))
+            if (collider.CompareTag(ConstantsLoader.WallTag) || collider.CompareTag(ConstantsLoader.BlockTag) || collider.CompareTag(ConstantsLoader.PlayerTag))
             {
                 return false;
             }
