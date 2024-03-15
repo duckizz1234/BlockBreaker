@@ -10,7 +10,7 @@ Implement a simple block breaker style game written in C# using Unity 2022.
 <br />    a) BaseView - View class that is attached to UI objects and allows them to be toggled visible/hidden when their related states is active/inactive (i.e. Replay menu)
 <br />    b) BaseState - State class that is attached to game objects and controls their behaviors (i.e. Moving for Projectiles)
 2) Data in Json - Storing the parameters used in the Json file means we can adjust the values on the fly without needing to recompile the program. This allows another game designer to tweak and playtest without needing an engineer's intervention.
-3) Singleton managers - Allows to easily connect objects to important parts of the game.
+3) Singleton managers - Allows easy connection objects to important parts of the game.
 4) Positional movement - Allows control of where the projectile is specifically. Instead of using just physics and adding directional velocity, I decided to implement moving by specific position so we can have granual control on where the projectiles are and can allow for interesting game design decisions.
 5) Object pooling - Reduces the load when it comes to creating and destroying prefabs. Using a pool means the same set of objects are reused thus reducing load on the game itself.
    
