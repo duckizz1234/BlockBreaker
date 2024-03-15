@@ -1,5 +1,5 @@
 {
-	"maxMessages":5,
+	"maxMessages":10,
 	"minNumOfBlocks":3,
 	"maxNumOfBlocks":10,
 	"turretRotationSpeed":10,
@@ -7,5 +7,6 @@
 	"maxBlockHealth":10,
 	"projectileSpeed":5,
 	"projectileLifeSpan":3,
-	"projectilePoolSize":30
+	"projectilePoolSize":30,
+	"minDistanceBetweenBlocks":2
 }

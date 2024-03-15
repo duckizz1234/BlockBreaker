@@ -15,6 +15,9 @@ public class ProjectileStateMachine : BaseStateMachine
     private float lifeTimer;
     private Vector3 currentDirection;
 
+    public delegate void LogMessageDelegate(string message);
+    public static event LogMessageDelegate OnLogMessage;
+
     public void StartMovingState(Vector3 turretDirection)
     {
         currentDirection = turretDirection;
@@ -48,13 +51,17 @@ public class ProjectileStateMachine : BaseStateMachine
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Block"))
+        if (collision.gameObject.CompareTag(ConstantsLoader.BlockTag) || collision.gameObject.CompareTag(ConstantsLoader.WallTag))
         {
-            Debug.Log("1");
             // Calculate reflection direction
             Vector3 normal = collision.GetContact(0).normal;
             currentDirection = Vector3.Reflect(currentDirection, normal);
             StartMovingState(currentDirection);
+
+            if (collision.gameObject.CompareTag(ConstantsLoader.BlockTag))
+            {
+                OnLogMessage.Invoke("Projectile hit block");
+            }            
         }
     }
 }

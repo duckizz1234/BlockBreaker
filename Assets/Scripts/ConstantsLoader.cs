@@ -14,6 +14,11 @@ public class ConstantsLoader : MonoBehaviour
     public int projectileSpeed;
     public int projectileLifeSpan;
     public int projectilePoolSize;
+    public int minDistanceBetweenBlocks;
+    
+    public const string WallTag = "Wall";
+    public const string BlockTag = "Block";
+    public const string ProjectileTag = "Projectile";
 
     private void Awake()
     {
@@ -45,6 +50,7 @@ public class ConstantsLoader : MonoBehaviour
             projectileSpeed = constantsData.projectileSpeed;
             projectileLifeSpan = constantsData.projectileLifeSpan;
             projectilePoolSize = constantsData.projectilePoolSize;
+            minDistanceBetweenBlocks = constantsData.minDistanceBetweenBlocks;
         }
         else
         {
@@ -65,4 +71,5 @@ public class ConstantsData
     public int projectileSpeed;
     public int projectileLifeSpan;
     public int projectilePoolSize;
+    public int minDistanceBetweenBlocks;
 }

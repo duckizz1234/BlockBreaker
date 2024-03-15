@@ -3,7 +3,8 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     public float rotationSpeed = 10;
-
+    public delegate void LogMessageDelegate(string message);
+    public static event LogMessageDelegate OnLogMessage;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class TurretController : MonoBehaviour
             projectile.transform.rotation = transform.rotation;
             projectile.SetActive(true);
             projectile.GetComponent<ProjectileStateMachine>().StartMovingState(transform.right);
-            // Set projectile direction and speed...
+            OnLogMessage?.Invoke("Projectile shot");
         }
     }
 }
