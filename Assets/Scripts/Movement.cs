@@ -8,16 +8,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
-    // Reference to rigidbody
+    /// <summary>
+    /// Reference to rigidbody
+    /// </summary>
     private Rigidbody2D rb;
 
-    // Storing input for movement in FixedUpdate
+    /// <summary>
+    /// Storing input for movement in FixedUpdate
+    /// </summary>
     private Vector2 input;
 
-    // Movement speed
+    /// <summary>
+    /// Movement speed. Set by default but will get actual value from Constants.json
+    /// </summary>
     [SerializeField]
     private float moveSpeed = 3;
 
+    /// <summary>
+    /// Determines if the projectile can move or not
+    /// </summary>
     private bool canMove = false;
 
     /// <summary>
@@ -53,7 +62,7 @@ public class Movement : MonoBehaviour
     }
 
     /// <summary>
-    /// Passing direction as input where Object should fly.
+    /// Passing direction as input where Object should move.
     /// </summary>
     /// <param name="input">Input - direciton.</param>
     public void Move(Vector2 input)
@@ -67,6 +76,10 @@ public class Movement : MonoBehaviour
         this.input = input;
     }
 
+    /// <summary>
+    /// Toggles if the projectile can move or not
+    /// </summary>
+    /// <param name="canMove"></param>
     public void ToggleMove(bool canMove)
     {
         this.canMove = canMove;

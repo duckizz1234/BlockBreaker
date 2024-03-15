@@ -4,7 +4,9 @@
 /// </summary>
 public abstract class BaseState
 {
-    // Reference to our state machine.
+    /// <summary>
+    /// Reference to our state machine. 
+    /// </summary>
     public BaseStateMachine owner;
 
     /// <summary>

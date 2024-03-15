@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// Triggers the replay state. This is when all the blocks have been destroyed
+/// </summary>
 public class ReplayState : BaseState
 {
     public override void PrepareState()
@@ -11,7 +10,10 @@ public class ReplayState : BaseState
         // Show menu view
         ((MenuStateMachine)owner).UI.ReplayView.ShowView();
 
+        // Freezes all existing projectiles on the screen
         ProjectilePooler.Instance.FreezeAllProjectiles();
+
+        // Freezes the player as well
         GameManager.Instance.player.ToggleCanMove(false);
     }
 

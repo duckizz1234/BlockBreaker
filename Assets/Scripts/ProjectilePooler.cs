@@ -1,12 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Pooler to control projectiles so that we won't be creating and destroying all the time
+/// </summary>
 public class ProjectilePooler : MonoBehaviour
 {
     public static ProjectilePooler Instance;
-
+    /// <summary>
+    /// References to the projectile prefab
+    /// </summary>
     public GameObject projectilePrefab;
-    public int poolSize = 10;
+
+    /// <summary>
+    /// Size of the pool. This is the default value and will be updated via Constants.json
+    /// </summary>
+    private int poolSize = 10;
+
+    /// <summary>
+    /// List that contains the list of projectiles to be used
+    /// </summary>
     private Queue<GameObject> projectilePool = new Queue<GameObject>();
 
     private void Awake()
@@ -24,6 +37,9 @@ public class ProjectilePooler : MonoBehaviour
         InitializePool();
     }
 
+    /// <summary>
+    /// Initializes the projectile pool once per game load
+    /// </summary>
     private void InitializePool()
     {
         projectilePool.Clear();
@@ -35,6 +51,10 @@ public class ProjectilePooler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Retrieves the first available gameobject from the queue
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetProjectile()
     {
         if (projectilePool.Count == 0)
@@ -47,12 +67,19 @@ public class ProjectilePooler : MonoBehaviour
         return projectile;
     }
 
+    /// <summary>
+    /// Returns the used projectile back to the pool
+    /// </summary>
+    /// <param name="projectile"></param>
     public void ReturnProjectile(GameObject projectile)
     {
         projectile.SetActive(false);
         projectilePool.Enqueue(projectile);
     }
 
+    /// <summary>
+    /// Freezes all active projectiles in place
+    /// </summary>
     public void FreezeAllProjectiles()
     {
         foreach(Transform projectile in transform)
@@ -64,6 +91,9 @@ public class ProjectilePooler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns all active projectiles back to the queue
+    /// </summary>
     public void ResetPool()
     {
         foreach(Transform projectile in transform)

@@ -1,14 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// Move state for the projectile
+/// </summary>
 public class ProjectileMoveState : BaseState
 {
-    // Store picked direction to go to
+    /// <summary>
+    /// Store picked direction to go to 
+    /// </summary>
     public Vector2 moveDirection;
-
-    public override void PrepareState()
-    {
-        base.PrepareState();
-    }
 
     public override void UpdateState()
     {
@@ -19,7 +19,7 @@ public class ProjectileMoveState : BaseState
             moveDirection.Normalize();
         }
 
-        // Passing direction to our SimpleMovement component
+        // Passing direction to our Movement component
         ((ProjectileStateMachine)owner).Movement.Move(moveDirection);
     }
 }

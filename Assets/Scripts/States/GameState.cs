@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// Start playing game state
+/// </summary>
 public class GameState : BaseState
 {
     public override void PrepareState()
@@ -10,17 +9,14 @@ public class GameState : BaseState
 
         // Show Game view
         var listOfGameViews = ((MenuStateMachine)owner).UI.GameView;
+
+        // Potentially there can be several views that make up this state so trigger each of them to show
         foreach (var gameView in listOfGameViews)
         {
             gameView.ShowView();
         }
+
+        // Start the level
         GameManager.Instance.StartLevel();
-    }
-
-    public override void DestroyState()
-    {
-        // Hide menu view
-
-        base.DestroyState();
     }
 }
