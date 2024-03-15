@@ -21,6 +21,7 @@ public class MenuStateMachine : BaseStateMachine
     /// </summary>
     public void OnStartGamePressed()
     {
+        Camera.main.GetComponent<CameraShake>().shakeDuration = 0f;
         ChangeState(new GameState());
     }
 }

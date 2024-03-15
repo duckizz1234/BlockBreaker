@@ -8,5 +8,6 @@
 	"projectileSpeed":8,
 	"projectileLifeSpan":3,
 	"projectilePoolSize":50,
-	"minDistanceBetweenBlocks":2
+	"minDistanceBetweenBlocks":2,
+	"showJuice":false
 }

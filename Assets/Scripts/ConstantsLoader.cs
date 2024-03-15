@@ -15,11 +15,13 @@ public class ConstantsLoader : MonoBehaviour
     public int projectileLifeSpan;
     public int projectilePoolSize;
     public int minDistanceBetweenBlocks;
+    public bool showJuice;
     
     public const string WallTag = "Wall";
     public const string BlockTag = "Block";
     public const string ProjectileTag = "Projectile";
     public const string PlayerTag = "Player";
+    public const string BlockBounceBool = "IsHit";
 
     private void Awake()
     {
@@ -34,6 +36,9 @@ public class ConstantsLoader : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Load the constants from json file
+    /// </summary>
     void LoadConstants()
     {
         string path = Application.streamingAssetsPath + "/Constants.json";
@@ -52,6 +57,7 @@ public class ConstantsLoader : MonoBehaviour
             projectileLifeSpan = constantsData.projectileLifeSpan;
             projectilePoolSize = constantsData.projectilePoolSize;
             minDistanceBetweenBlocks = constantsData.minDistanceBetweenBlocks;
+            showJuice = constantsData.showJuice;
         }
         else
         {
@@ -73,4 +79,5 @@ public class ConstantsData
     public int projectileLifeSpan;
     public int projectilePoolSize;
     public int minDistanceBetweenBlocks;
+    public bool showJuice;
 }

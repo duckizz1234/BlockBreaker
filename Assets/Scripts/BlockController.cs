@@ -23,14 +23,27 @@ public class BlockController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(ConstantsLoader.ProjectileTag))
         {
+            if (ConstantsLoader.Instance.showJuice)
+            {
+                GetComponent<Animator>().SetBool(ConstantsLoader.BlockBounceBool, true);
+            }
+
+            // Decrement Health
             health--;
             if (health <= 0)
             {
+                // No health left so destroy block
                 OnLogMessage?.Invoke("Block Destroyed");
                 GameManager.Instance.RemoveBlockFromList(gameObject);
+                Camera.main.GetComponent<CameraShake>().Shake();
                 Destroy(gameObject);
             }
             UpdateHealthText();
         }
+    }
+
+    public void ResetTriggerFlag()
+    {
+        GetComponent<Animator>().SetBool(ConstantsLoader.BlockBounceBool, false);
     }
 }
