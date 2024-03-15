@@ -16,6 +16,7 @@ Implement a simple block breaker style game written in C# using Unity 2022.
    
 # Challenges
 1) Starting on juice - I am often tempted to start putting juice and polish in the game even at this early stage. But I do understand that often, an initial prototype or test does not require all the bells and whistles as it may distract testers from testing the actual game mechanism properly
+2) Starting complexity - Trying to figure just how complex I should go into this prototype is a slight challenge for me. I decided to find a balance between implement a few different concepts and having the game work properly.
 
 # Potential Improvements
 1) Level design - Design a template where level designer can easily indicate where the blocks and their levels are and the game will have a LevelManager which can load the level accordingly.
