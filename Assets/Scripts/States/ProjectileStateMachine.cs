@@ -35,6 +35,8 @@ public class ProjectileStateMachine : BaseStateMachine
     /// </summary>
     private Vector3 currentDirection;
 
+    private bool canMove = false;
+
     /// <summary>
     /// Triggered to start moving process
     /// </summary>
@@ -42,11 +44,12 @@ public class ProjectileStateMachine : BaseStateMachine
     public void StartMovingState(Vector3 turretDirection)
     {
         currentDirection = turretDirection;
-        ProjectileMoveState projecttileMoveState = new ProjectileMoveState();
-        projecttileMoveState.moveDirection = turretDirection.normalized;
+        ProjectileMoveState projectileMoveState = new ProjectileMoveState();
+        projectileMoveState.moveDirection = turretDirection.normalized;
         lifespan = ConstantsLoader.Instance.projectileLifeSpan;
         lifeTimer = lifespan;
-        ChangeState(projecttileMoveState);
+        canMove = true;
+        ChangeState(projectileMoveState);
     }
 
     /// <summary>
@@ -55,7 +58,10 @@ public class ProjectileStateMachine : BaseStateMachine
     /// </summary>
     private void FixedUpdate()
     {
-        UpdateTimer();
+        if (canMove)
+        {
+            UpdateTimer();
+        }
     }
     
     /// <summary>
@@ -76,7 +82,7 @@ public class ProjectileStateMachine : BaseStateMachine
     /// <param name="collision"></param>
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(ConstantsLoader.BlockTag) || collision.gameObject.CompareTag(ConstantsLoader.WallTag))
+        if (canMove && (collision.gameObject.CompareTag(ConstantsLoader.BlockTag) || collision.gameObject.CompareTag(ConstantsLoader.WallTag)))
         {
             // Calculate reflection direction
             Vector3 normal = collision.GetContact(0).normal;
@@ -96,6 +102,7 @@ public class ProjectileStateMachine : BaseStateMachine
     /// </summary>
     public void FreezeProjectile()
     {
+        canMove = false;
         ChangeState(new ProjectileFreezeState());
     }
 }
