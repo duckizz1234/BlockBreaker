@@ -61,11 +61,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void SpawnBlocks()
     {
-        // Destroys all blocks that may have remained behind
-        foreach(var block in listOfBlocks)
-        {
-            Destroy(block);
-        }
+        ClearBlocks();
 
         // Randomly determines the number of blocks to spawn
         int numBlocks = Random.Range(ConstantsLoader.Instance.minNumOfBlocks, ConstantsLoader.Instance.maxNumOfBlocks);
@@ -75,6 +71,19 @@ public class GameManager : MonoBehaviour
             Vector2 spawnPos = GetValidSpawnPosition();
             listOfBlocks.Add(Instantiate(blockPrefab, spawnPos, Quaternion.identity, blockParent));
         }
+    }
+
+    /// <summary>
+    /// Clears any existing blocks
+    /// </summary>
+    private void ClearBlocks()
+    {
+        // Destroys all blocks that may have remained behind
+        foreach (var block in listOfBlocks)
+        {
+            Destroy(block);
+        }
+        listOfBlocks.Clear();
     }
 
     /// <summary>
@@ -91,9 +100,7 @@ public class GameManager : MonoBehaviour
         // Tries to get valid spawn position but will time out if max attempts has been reached
         do
         {
-            spawnPos = new Vector2(Random.Range(walls[0].position.x, walls[1].position.x),
-                                   Random.Range(walls[2].position.y, walls[3].position.y));
-
+            spawnPos = GetRandomPositionWithinBounds();
             isValid = IsSpawnPositionValid(spawnPos);
             attempts++;
         } while (!isValid && attempts < maxAttempts);
@@ -104,6 +111,16 @@ public class GameManager : MonoBehaviour
         }
 
         return spawnPos;
+    }
+
+    /// <summary>
+    /// Get random position within bounds of the walls of the game area
+    /// </summary>
+    /// <returns></returns>
+    private Vector2 GetRandomPositionWithinBounds()
+    {
+        return new Vector2(Random.Range(walls[0].position.x, walls[1].position.x),
+                           Random.Range(walls[2].position.y, walls[3].position.y));
     }
 
     /// <summary>

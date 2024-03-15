@@ -19,6 +19,7 @@ public class UIRoot : MonoBehaviour
 
     private void Awake()
     {
+        // Hide all other views and only show the main menu when game is loaded
         ReplayView.HideView();
         foreach (var view in gameView)
         {
