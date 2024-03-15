@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public Transform[] walls;
     public static GameManager Instance;
     private List<GameObject> listOfBlocks = new List<GameObject>();
+    public TurretController player;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,12 +24,17 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         SpawnBlocks();
+        ProjectilePooler.Instance.ResetPool();
+        player.ToggleCanMove(true);
     }
 
     private void SpawnBlocks()
     {
         int numBlocks = Random.Range(ConstantsLoader.Instance.minNumOfBlocks, ConstantsLoader.Instance.maxNumOfBlocks);
-        listOfBlocks.Clear();
+        foreach(var block in listOfBlocks)
+        {
+            Destroy(block);
+        }
         for (int i = 0; i < numBlocks; i++)
         {
             Vector2 spawnPos = GetValidSpawnPosition();
@@ -81,6 +88,14 @@ public class GameManager : MonoBehaviour
     private void CheckAnyBlocksLeft()
     {
         if (listOfBlocks.Count == 0)
+        {
+            GetComponent<MenuStateMachine>().ChangeState(new ReplayState());
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.A))
         {
             GetComponent<MenuStateMachine>().ChangeState(new ReplayState());
         }

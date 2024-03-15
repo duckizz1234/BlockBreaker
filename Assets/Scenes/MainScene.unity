@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 1593571764}
   - {fileID: 2132300607}
   - {fileID: 1198033846}
+  player: {fileID: 1520751569}
 --- !u!114 &2636850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,6 +1639,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7217672262227246188, guid: 87db8d2a0f5bbd64694c00a38fda6766, type: 3}
   m_PrefabInstance: {fileID: 730770280118922554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520751569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 396483225272090793, guid: 87db8d2a0f5bbd64694c00a38fda6766, type: 3}
+  m_PrefabInstance: {fileID: 730770280118922554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520751566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860117ca6641e1a45bf3b446c94c3161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1520751570
 BoxCollider2D:
   m_ObjectHideFlags: 0

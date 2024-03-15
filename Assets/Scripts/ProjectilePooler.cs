@@ -26,6 +26,7 @@ public class ProjectilePooler : MonoBehaviour
 
     private void InitializePool()
     {
+        projectilePool.Clear();
         for (int i = 0; i < poolSize; i++)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform);
@@ -50,5 +51,27 @@ public class ProjectilePooler : MonoBehaviour
     {
         projectile.SetActive(false);
         projectilePool.Enqueue(projectile);
+    }
+
+    public void FreezeAllProjectiles()
+    {
+        foreach(Transform projectile in transform)
+        {
+           if (projectile.gameObject.activeSelf)
+            {
+                projectile.GetComponent<ProjectileStateMachine>().FreezeProjectile();
+            }
+        }
+    }
+
+    public void ResetPool()
+    {
+        foreach(Transform projectile in transform)
+        {
+            if (projectile.gameObject.activeSelf)
+            {
+                ReturnProjectile(projectile.gameObject);
+            }
+        }
     }
 }

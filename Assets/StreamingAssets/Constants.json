@@ -7,6 +7,6 @@
 	"maxBlockHealth":10,
 	"projectileSpeed":8,
 	"projectileLifeSpan":3,
-	"projectilePoolSize":30,
+	"projectilePoolSize":50,
 	"minDistanceBetweenBlocks":2
 }

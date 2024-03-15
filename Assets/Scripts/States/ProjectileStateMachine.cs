@@ -21,11 +21,11 @@ public class ProjectileStateMachine : BaseStateMachine
     public void StartMovingState(Vector3 turretDirection)
     {
         currentDirection = turretDirection;
-        ProjectileMoveState projectMoveState = new ProjectileMoveState();
-        projectMoveState.moveDirection = turretDirection.normalized;
+        ProjectileMoveState projecttileMoveState = new ProjectileMoveState();
+        projecttileMoveState.moveDirection = turretDirection.normalized;
         lifespan = ConstantsLoader.Instance.projectileLifeSpan;
         lifeTimer = lifespan;
-        ChangeState(projectMoveState);
+        ChangeState(projecttileMoveState);
     }
 
     private void ReturnToPool()
@@ -63,6 +63,11 @@ public class ProjectileStateMachine : BaseStateMachine
                 OnLogMessage.Invoke("Projectile hit block");
             }            
         }
+    }
+
+    public void FreezeProjectile()
+    {
+        ChangeState(new ProjectileFreezeState());
     }
 }
 

@@ -21,12 +21,5 @@ public class ProjectileMoveState : BaseState
 
         // Passing direction to our SimpleMovement component
         ((ProjectileStateMachine)owner).Movement.Move(moveDirection);
-
-      /*  // Destination reached!
-        if (direction.magnitude < 0.2f)
-        {
-            // Now wait!
-            owner.ChangeState(new WaitState());
-        }*/
     }
 }

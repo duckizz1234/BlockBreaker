@@ -5,17 +5,20 @@ public class TurretController : MonoBehaviour
     public float rotationSpeed = 10;
     public delegate void LogMessageDelegate(string message);
     public static event LogMessageDelegate OnLogMessage;
-
+    private bool canMove = false;
     private void Start()
     {
         rotationSpeed = ConstantsLoader.Instance.turretRotationSpeed;
     }
     void Update()
     {
-        RotateTurret();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (canMove)
         {
-            Shoot();
+            RotateTurret();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Shoot();
+            }
         }
     }
 
@@ -39,5 +42,10 @@ public class TurretController : MonoBehaviour
             projectile.GetComponent<ProjectileStateMachine>().StartMovingState(transform.right);
             OnLogMessage?.Invoke("Projectile shot");
         }
+    }
+
+    public void ToggleCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }

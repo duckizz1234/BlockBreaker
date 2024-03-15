@@ -10,6 +10,9 @@ public class ReplayState : BaseState
 
         // Show menu view
         ((MenuStateMachine)owner).UI.ReplayView.ShowView();
+
+        ProjectilePooler.Instance.FreezeAllProjectiles();
+        GameManager.Instance.player.ToggleCanMove(false);
     }
 
     public override void DestroyState()

@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 3;
 
+    private bool canMove = false;
+
     /// <summary>
     /// Initialization of movement.
     /// </summary>
@@ -40,8 +42,14 @@ public class Movement : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        input *= moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + input);
+        if (canMove)
+        {
+            input *= moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + input);
+        } else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     /// <summary>
@@ -50,12 +58,18 @@ public class Movement : MonoBehaviour
     /// <param name="input">Input - direciton.</param>
     public void Move(Vector2 input)
     {
+        ToggleMove(true);
         if (input.magnitude > 1)
         {
             input.Normalize();
         }
 
         this.input = input;
+    }
+
+    public void ToggleMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }
 
