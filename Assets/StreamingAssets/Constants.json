@@ -6,5 +6,6 @@
 	"minBlockHealth":1,
 	"maxBlockHealth":10,
 	"projectileSpeed":5,
-	"projectileLifeSpan":3
+	"projectileLifeSpan":3,
+	"projectilePoolSize":30
 }

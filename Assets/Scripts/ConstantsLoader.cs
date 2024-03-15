@@ -13,6 +13,7 @@ public class ConstantsLoader : MonoBehaviour
     public int maxBlockHealth;
     public int projectileSpeed;
     public int projectileLifeSpan;
+    public int projectilePoolSize;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class ConstantsLoader : MonoBehaviour
             maxBlockHealth = constantsData.maxBlockHealth;
             projectileSpeed = constantsData.projectileSpeed;
             projectileLifeSpan = constantsData.projectileLifeSpan;
+            projectilePoolSize = constantsData.projectilePoolSize;
         }
         else
         {
@@ -62,4 +64,5 @@ public class ConstantsData
     public int maxBlockHealth;
     public int projectileSpeed;
     public int projectileLifeSpan;
+    public int projectilePoolSize;
 }

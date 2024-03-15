@@ -13,9 +13,11 @@ public class ProjectileStateMachine : BaseStateMachine
 
     private float lifespan = 3f;
     private float lifeTimer;
+    private Vector3 currentDirection;
 
-    public void StartState(Vector3 turretDirection)
+    public void StartMovingState(Vector3 turretDirection)
     {
+        currentDirection = turretDirection;
         ProjectileMoveState projectMoveState = new ProjectileMoveState();
         projectMoveState.moveDirection = turretDirection.normalized;
         lifespan = ConstantsLoader.Instance.projectileLifeSpan;
@@ -40,6 +42,19 @@ public class ProjectileStateMachine : BaseStateMachine
         if (lifeTimer <= 0f)
         {
             ReturnToPool();
+        }
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            Debug.Log("1");
+            // Calculate reflection direction
+            Vector3 normal = collision.GetContact(0).normal;
+            currentDirection = Vector3.Reflect(currentDirection, normal);
+            StartMovingState(currentDirection);
         }
     }
 }

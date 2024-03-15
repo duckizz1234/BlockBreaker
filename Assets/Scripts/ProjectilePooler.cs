@@ -16,6 +16,11 @@ public class ProjectilePooler : MonoBehaviour
         else
             Destroy(gameObject);
 
+    }
+
+    private void Start()
+    {
+        poolSize = ConstantsLoader.Instance.projectilePoolSize;
         InitializePool();
     }
 

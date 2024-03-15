@@ -35,7 +35,7 @@ public class TurretController : MonoBehaviour
             projectile.transform.position = transform.position;
             projectile.transform.rotation = transform.rotation;
             projectile.SetActive(true);
-            projectile.GetComponent<ProjectileStateMachine>().StartState(transform.right);
+            projectile.GetComponent<ProjectileStateMachine>().StartMovingState(transform.right);
             // Set projectile direction and speed...
         }
     }
