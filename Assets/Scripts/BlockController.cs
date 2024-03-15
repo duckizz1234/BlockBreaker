@@ -27,6 +27,7 @@ public class BlockController : MonoBehaviour
             if (health <= 0)
             {
                 OnLogMessage?.Invoke("Block Destroyed");
+                GameManager.Instance.RemoveBlockFromList(gameObject);
                 Destroy(gameObject);
             }
             UpdateHealthText();

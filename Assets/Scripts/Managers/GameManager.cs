@@ -1,28 +1,37 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject blockPrefab;
     public Transform blockParent;
     public Transform[] walls;
-
-    void Start()
+    public static GameManager Instance;
+    private List<GameObject> listOfBlocks = new List<GameObject>();
+    private void Awake()
     {
-        StartLevel();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-
-    void StartLevel()
+    public void StartLevel()
     {
         SpawnBlocks();
     }
 
-    void SpawnBlocks()
+    private void SpawnBlocks()
     {
         int numBlocks = Random.Range(ConstantsLoader.Instance.minNumOfBlocks, ConstantsLoader.Instance.maxNumOfBlocks);
+        listOfBlocks.Clear();
         for (int i = 0; i < numBlocks; i++)
         {
             Vector2 spawnPos = GetValidSpawnPosition();
-            Instantiate(blockPrefab, spawnPos, Quaternion.identity, blockParent);
+            listOfBlocks.Add(Instantiate(blockPrefab, spawnPos, Quaternion.identity, blockParent));
         }
     }
 
@@ -61,5 +70,19 @@ public class GameManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void RemoveBlockFromList(GameObject block)
+    {
+        listOfBlocks.Remove(block);
+        CheckAnyBlocksLeft();
+    }
+
+    private void CheckAnyBlocksLeft()
+    {
+        if (listOfBlocks.Count == 0)
+        {
+            GetComponent<MenuStateMachine>().ChangeState(new ReplayState());
+        }
     }
 }
